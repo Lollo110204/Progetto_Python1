@@ -1,0 +1,71 @@
+git statusQuesto codice Python utilizza le librerie `pandas`, `matplotlib.pyplot`, e `numpy` per calcolare e visualizzare la media degli arrivi da tre file CSV. Vediamo il codice nei dettagli:
+
+1. **Importazioni**:
+ 	  import pandas as pd
+  import matplotlib.pyplot as plt
+  import numpy as np
+
+
+    - `pandas`: Utilizzato per la manipolazione e l'analisi dei dati.
+    - `matplotlib.pyplot`: Utilizzato per la creazione di grafici.
+    - `numpy`: Utilizzato per operazioni numeriche (anche se in questo specifico codice non viene utilizzato direttamente).
+
+2. **Funzione `calcola_media_arrivi`**:
+
+    def calcola_media_arrivi(percorso_file):
+    df = pd.read_csv(percorso_file, sep=';', encoding='UTF-8')
+    media_arrivi = df['Arrivi'].mean()
+    return media_arrivi
+
+
+    - Legge un file CSV il cui percorso è passato come argomento.
+    - Utilizza `pandas` per leggere il file con `pd.read_csv()`, specificando che i campi sono separati da punto e virgola (`sep=';'`) e che il file è codificato in UTF-8 (`encoding='UTF-8'`).
+    - Calcola la media della colonna `Arrivi` usando il metodo `mean()` di pandas.
+    - Restituisce la media calcolata.
+
+3. **Funzione `graficoMedieArrivi`**:
+def graficoMedieArrivi(percorso_file1, percorso_file2, percorso_file3):
+    # Calcola la media degli arrivi per ciascun file
+    media1 = calcola_media_arrivi(percorso_file1)
+    media2 = calcola_media_arrivi(percorso_file2)
+    media3 = calcola_media_arrivi(percorso_file3)
+
+    # Crea un dataframe per le medie
+    df_medie = pd.DataFrame({
+        'Dataset': ['Agriturismi', 'Alberghi', 'Villaggi Turistici'],
+        'Media Arrivi': [media1, media2, media3]
+    })
+
+    # Crea il grafico a barre
+    plt.figure(figsize=(10, 6))
+    plt.bar(df_medie['Dataset'], df_medie['Media Arrivi'], color=['blue', 'orange', 'green'])
+
+    # Aggiungi etichette e titolo
+    plt.xlabel('Dataset')
+    plt.ylabel('Media Arrivi')
+    plt.title('Media degli Arrivi per ciascun Dataset')
+
+    # Mostra il grafico
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+    - Calcola la media degli arrivi per ciascuno dei tre file CSV usando la funzione `calcola_media_arrivi`.
+    - Crea un DataFrame `df_medie` utilizzando `pandas`, contenente le medie degli arrivi e i nomi dei dataset (Agriturismi, Alberghi, Villaggi Turistici).
+    - Configura il grafico a barre usando `matplotlib`:
+        - Crea una figura con dimensioni specificate.
+        - Crea un grafico a barre con `plt.bar()`, specificando i dataset sull'asse x e le medie sull'asse y, con colori differenti per ogni barra.
+        - Aggiunge etichette agli assi (`plt.xlabel()` e `plt.ylabel()`) e un titolo al grafico (`plt.title()`).
+        - Mostra una griglia di fondo (`plt.grid(True)`), ottimizza il layout (`plt.tight_layout()`), e visualizza il grafico con `plt.show()`.
+
+4. **Esecuzione della funzione `graficoMedieArrivi`**:
+    ```python
+    graficoMedieArrivi('/content/drive/Shareddrives/Progetto_python/datasets/Arrivi-negli-agriturismi-in-Italia-per-regione.csv',
+                       '/content/drive/Shareddrives/Progetto_python/datasets/Arrivi-negli-esercizi-alberghieri-in-Italia-per-regione (1).csv',
+                       '/content/drive/Shareddrives/Progetto_python/datasets/Arrivi-nei-campeggi-e-villaggi-turistici-in-italia-per-regione.csv')
+    ```
+    - Chiama la funzione `graficoMedieArrivi` con i percorsi dei tre file CSV. Questi file contengono dati sugli arrivi negli agriturismi, negli alberghi e nei villaggi turistici in Italia per regione.
+
+In sintesi, questo codice carica i dati degli arrivi da tre file CSV, calcola la media degli arrivi per ciascun dataset, e visualizza queste medie in un grafico a barre.
+
