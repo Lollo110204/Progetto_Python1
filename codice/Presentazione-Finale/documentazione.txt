@@ -1,4 +1,4 @@
-Questo codice Python utilizza le librerie `pandas`, `matplotlib.pyplot`, e `numpy` per calcolare e visualizzare la media degli arrivi da tre file CSV. Vediamo il codice nei dettagli:
+git statusQuesto codice Python utilizza le librerie `pandas`, `matplotlib.pyplot`, e `numpy` per calcolare e visualizzare la media degli arrivi da tre file CSV. Vediamo il codice nei dettagli:
 
 1. **Importazioni**:
  	  import pandas as pd
